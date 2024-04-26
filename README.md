@@ -21,10 +21,11 @@ Die `app.py` gibt die Grundlage für die App und kann auch ohne GUI ausgeführt 
 + Um mit der app.py eine ical Datei zu generieren muss zuerst eine OptionList Instanzieren werden.
 + Die OptionList kann mehrere Option Objekte beinhaltet die auch vorher instanziert werden müssen. (Siehe app.py Datei)
 + Außerdem besteht die Möglichkeit mit der update Funktion die `data.json` Datei erneut zu generieren
-+ Schließlich kann mit der ical Funktion die .ical Datei in den aktuellen Verzeichnis geschrieben werden und das war*s!<br>
++ Schließlich kann mit der ical Funktion die .ical Datei in den aktuellen Verzeichnis geschrieben werden und das war's!<br>
 <br>
+
 Die `frame.py` ergibt die Grafische Oberfläche und macht sie zu einer vollständigen Anwendung.<br>
-+ Die `frame.py` Datei bietet weniger Flexibilität. Am Besten wird diese Datei einfach nur ausgeführt.
+* Die `frame.py` Datei bietet weniger Flexibilität. Am Besten wird diese Datei einfach nur ausgeführt.
 
 # Problems
 Bei Problemen gerne ein Issue erstellen.
