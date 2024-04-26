@@ -22,8 +22,6 @@ class App:
         :param _options: The _options for the app as an OptionList object"""
         # check last update
         self._options = None
-        self.studiengang = None
-        self.semester = None
 
         # working directory
         self.workingdir = os.path.dirname(os.path.abspath(__file__)) + "/"
@@ -45,6 +43,10 @@ class App:
     def ical(self, veranstaltungen: list[dict]=[]) -> None:
         """Create the ical file.
         The ical file is created based on the _options given by the user."""
+        if self._options is not None:
+            for o in self._options:
+                veranstaltungen += self.getVeranstaltungen(o.studiengang + " " + str(o.semester))
+
         if not veranstaltungen:
             for lv in self.data[:-1]:
                 if lv["semesterName"] == self.studiengang + " " + str(self.semester):
@@ -78,8 +80,6 @@ class App:
         """Set the _options for the app.
         :param options: The _options for the app as an OptionList object"""
         self._options = options.get_options()
-        self.studiengang = self._options[0].studiengang
-        self.semester = self._options[0].semester
 
     def __sort(self, data: list[dict]) -> list[dict]:
         """Sorts the data by semesterName alphabetically.
@@ -182,11 +182,13 @@ if __name__ == '__main__':
     ## _options for the app
     # verbesserungsidee Professoren, Lehrveranstaltungen
     o = Option("BI", 2)
+    p = Option("BWI", 3)
+    q = Option("MVG", 3)
 
     ## create the option list
     # add more _options if needed by 
     # calling the add_option method or by adding them to the constructor
-    _options = OptionList(o)
+    _options = OptionList(o, p, q)
     # _options.add_option()
 
     # create the app object
