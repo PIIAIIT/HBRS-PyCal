@@ -1,5 +1,5 @@
 # HBRS-PyCal
-Willkommen zu einem kleinen Python-Projekt für das Webscraping der Website https://eva2.olotl.net/. Es extrahiert Daten, analysiert sie und erstellt eine iCal-Datei, die in Ihre Kalenderanwendung importiert werden kann. Bitte habt nachsicht mit dem unprofessionellen Python-Code und dem Design der App. Diese App wurde nur kurzfristig erstellt und eher aus Spaß. 😄
+Willkommen zu einem kleinen Python-Projekt für das Webscraping der Website https://eva2.olotl.net/. Es extrahiert Daten, analysiert sie und erstellt eine iCal-Datei, die in Ihre Kalenderanwendung importiert werden kann. Bitte habt Nachsicht mit dem unprofessionellen Python-Code und dem Design der App. Diese App wurde nur kurzfristig erstellt und eher aus Spaß. 😄
 
 # Requirements
 Um dieses Projekt auszuführen, benötigen Sie [Python](https://www.python.org/) und das Python-Modul customtkinter. Hier ist ein Link, wie Sie [customtkinter](https://pypi.org/project/customtkinter/0.3/) installieren können. Weitere offensichtliche Anforderungen finden Sie in der [requirements.txt](./requirements.txt).
