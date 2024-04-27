@@ -4,7 +4,7 @@ Willkommen zu einem kleinen Python-Projekt für das Webscraping der Website http
 # Requirements
 Um dieses Projekt auszuführen, benötigen Sie [Python](https://www.python.org/) und das Python-Modul customtkinter. Hier ist ein Link, wie Sie [customtkinter](https://pypi.org/project/customtkinter/0.3/) installieren können. Weitere offensichtliche Anforderungen finden Sie in der [requirements.txt](./requirements.txt).
 
-# Installation
+# How to use
 - Über die Konsole:
   + Geben Sie `git clone https://github.com/PIIAIIT/HBRS-PyCal.git` in Ihre Konsole ein
   + Wechseln Sie in das Verzeichnis `cd HBRS-PyCal`
@@ -14,6 +14,7 @@ Um dieses Projekt auszuführen, benötigen Sie [Python](https://www.python.org/)
   + Entpacken Sie die Zip-Datei in einem beliebigen Verzeichnis
   + Wechseln Sie in das Verzeichnis
   + Führen Sie die Python-Datei frame.py aus
+- Nachdem die `frame.py` Datei ausgeführt wurde ist die .ical-Datei in dem selben Verzeichnis wie die python-Dateien als `calendar.ical`.
 
 # How it works
 Die App besteht aus zwei Dateien der `frame.py` und der `app.py`<br>
