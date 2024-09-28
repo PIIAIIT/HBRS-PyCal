@@ -1,30 +1,33 @@
 import os
 from datetime import datetime
 import uuid
+PATH = os.getenv("PROJECT_DIR")
 
 
-def createCalendarFile(workingdir: str, fileName: str,
-                       data: list[dict]) -> None:
+def createCalendarFile(data: list[dict]) -> None:
     """Writes the ical file
     :param data: The data to write as a list of dictionaries"""
     # all conventions are based on the icalendar standard
-    x = 5
-    print(f"(1/{x}) Writing ical file...")
+    fileName = "stundenplan"
+    fileExt = "ical"
+    __x = 5
+    print(f"(1/{__x}) Writing ical file...")
 
     # check if the file already exists
     # and create a new one if necessary
-    print(f"(2/{x}) Creating new file...")
-    calenderFilePath = f"output/{fileName}"
-    os.makedirs(workingdir + "output", exist_ok=True)
+    print(f"(2/{__x}) Creating new file...")
+    calenderFilePath = f"/output/{fileName}"
+    os.makedirs(PATH + "/output", exist_ok=True)
     for i in range(1, 100):
-        tempPath = f"output/calendar({i}).ical" if i else calenderFilePath
-        if not os.path.exists(workingdir + tempPath):
+        tempPath = f"/output/{fileName}({i}).{fileExt}" \
+            if i else calenderFilePath
+        if not os.path.exists(PATH + tempPath):
             calenderFilePath = tempPath
             break
-    print(f"(3/{x}) File created: {calenderFilePath}")
+    print(f"(3/{__x}) File created: {calenderFilePath}")
 
-    print(f"(4/{x}) Writing to: {calenderFilePath}")
-    with open(workingdir + calenderFilePath, "w") as f:
+    print(f"(4/{__x}) Writing to: {calenderFilePath}")
+    with open(PATH + calenderFilePath, "w", encoding="utf-8") as f:
         # Calender Header
         f.write("BEGIN:VCALENDAR\n")
 
@@ -84,4 +87,4 @@ def createCalendarFile(workingdir: str, fileName: str,
 
         # Calender Footer
         f.write("END:VCALENDAR")
-    print(f"(5/{x}) Writing done.")
+    print(f"(5/{__x}) Writing done.")

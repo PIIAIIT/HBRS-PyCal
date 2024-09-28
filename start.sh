@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# config
+export PROJECT_DIR=$(pwd)
+
 # Pfad zur Python-Datei
 PYTHON_FILE="./__main__.py"
 
