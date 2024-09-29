@@ -1,5 +1,5 @@
 import os
-from datetime import datetime, date, time
+import datetime
 import uuid
 PROJECT_DIR = os.getenv("PROJECT_DIR")
 
@@ -37,8 +37,8 @@ def createCalendarFile(data: list[dict]) -> None:
         f.write("METHOD:PUBLISH\n")
         f.write("X-WR-CALNAME:Stundenplan H-brs\n")
         f.write("X-WR-TIMEZONE:Europe/Berlin\n")
-        f.write("X-WR-CALDESC:Stundenplan von der " +
-                "www.kalenderapp.aptinstall.de\\nSeite\n")
+        f.write("X-WR-CALDESC:" +
+                "Diese App referenziert den iCalGenerator von @Hochgesand\\nSeite\n")
 
         # Events
         for lv in data:
