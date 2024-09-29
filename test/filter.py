@@ -1,10 +1,7 @@
-from src.calendar import Calender
+from calendar import Calender
 import json
 import os
-from src.option import Option, OptionContains, OptionSemester, OptionVL
-from src.option import OptionLecturer, OptionType, OptionGroup, OptionWeekday
-
-PROJECT_DIR = os.getenv("PROJECT_DIR")
+from option import Option, OptionContains, OptionSemester, OptionVL, OptionLecturer, OptionType, OptionGroup, OptionWeekday
 
 
 class CalendarFilter:
@@ -15,7 +12,6 @@ class CalendarFilter:
 
         self.availableOptions = self.extractAvailableOptions(cal)
 
-        self.generateOptionFile()
         self.options: list[Option] = []
 
     def addOption(self, option: Option) -> None:
@@ -36,7 +32,7 @@ class CalendarFilter:
         """Adds the semester to the filter"""
         self.addOption(OptionSemester(semester, semesterNumber, contains))
 
-    def addVL(self, titleVL: str, contains: bool = True, group: str = "") -> None:
+    def addVL(self, titleVL: str, contains: bool = True) -> None:
         """Adds the VL to the filter"""
         self.addOption(OptionVL(titleVL, contains))
 
@@ -73,19 +69,8 @@ class CalendarFilter:
 
     def generateOptionFile(self) -> None:
         """Generates the option file"""
-        with open(PROJECT_DIR + "/cache/semester.json", "w", encoding="utf-8") as f:
-            json.dump(self.availableOptions, f, indent=4, ensure_ascii=False)
-
-    def __contains(self, dupe: dict, courses: list[dict]) -> bool:
-        """Checks if the course is already in the list"""
-        for course in courses:
-            if course["title"] == dupe["title"] and \
-                    course["weekday"] == dupe["weekday"] and \
-                    course["startTime"] == dupe["startTime"] and \
-                    course["endTime"] == dupe["endTime"] and \
-                    course["room"] == dupe["room"]:
-                return True
-        return False
+        with open("./cache/semester.json", "w", encoding="utf-8") as f:
+            json.dump(self.possibleOptions, f, indent=4, ensure_ascii=False)
 
     def filterCoursesByOptions(self) -> list[dict]:
         """Filters the data of the calender by the options
@@ -116,10 +101,7 @@ class CalendarFilter:
                 if not matches:
                     continue
                 if bInclude:
-                    if not self.__contains(course, include):
-                        include.append(course)
-                    if course in exclude:
-                        exclude.remove(course)
+                    include.append(course)
                 else:
                     exclude.append(course)
 
@@ -129,10 +111,34 @@ class CalendarFilter:
                 newData.append(course)
 
         # write the new data to a cache file
-        cache_dir = PROJECT_DIR + "/cache/"
+        cache_dir = os.path.abspath(__file__).split("test")[0] + "cache/"
         f = open(cache_dir + "after.json",
                  "w", encoding="utf-8")
         json.dump(newData, f, indent=4, ensure_ascii=False)
         f.close()
 
         return newData
+
+
+def getDataFromJson() -> list[dict]:
+    cache_dir = os.path.abspath(__file__).split("test")[0] + "cache/"
+    with open(cache_dir + "data.json", "r", encoding="utf-8") as f:
+        data = json.load(f)
+    return data
+
+
+if __name__ == "__main__":
+    cal = Calender()
+    data = getDataFromJson()
+    cal.fill(data)
+
+    filter = CalendarFilter(cal)
+    filter.addSemester("BI", 3)
+    filter.addSemester("BI", 1)
+    filter.addVL("Diskrete Mathematik und Lineare Algebra")
+    filter.addContains("Projekt-Seminar", "title", False)
+    filter.addVL("Competitive Bots")
+    newData = filter.filterCoursesByOptions()
+
+    # for i in range(newData.__len__()):
+    #     print(newData[i]["title"])
