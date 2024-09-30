@@ -32,7 +32,8 @@ if __name__ == "__main__":
     # USE addSemester to add a Semester that you want to include in your ical file
     # you can add a boolean value at the end of the function to decide if the semester should be included or not
     # addSemester(<SemsterName>, <SemesterNr>, <IncludeSemester>)
-    filter.addSemester("BI", 3)
+    filter.addSemester("BI", 1)
+    # filter.addSemester("BCSP", 3)
     # filter.addSemester("BI", 2)
     # filter.addSemester("BI", 1)
 
@@ -41,7 +42,7 @@ if __name__ == "__main__":
     # you can add a boolean value at the end of the function to decide if the VL should be included or not
     # addVL(<VLName>, <IncludeVL>)
     # For <VLName> you can look at the "cache/semester.json" file
-    filter.addVL("Diskrete Mathematik und Lineare Algebra")
+    # filter.addVL("Diskrete Mathematik und Lineare Algebra")
     # filter.addVL("Grundlagen von Wahrscheinlichkeitstheorie und Statistik", group="4")
     # filter.addVL("Betriebssysteme", group="4")
     # filter.addVL("Einführung in die Automatentheorie und Formale Sprachen", group="4")
@@ -52,11 +53,11 @@ if __name__ == "__main__":
     # arg[2] is a boolean value that decides if the string should be contained or not
     # addContains(<String>, <Key>, <IncludeString>)
     # for the <Key> you can look at the "cache/data.json" file
-    filter.addContains("Projekt-Seminar", "title", False)
+    # filter.addContains("Projekt-Seminar", "title", False)
 
     # TODO: ADD YOUR CODE HERE
     # YOU CAN include Options that you excluded
-    filter.addVL("Competitive Bots")
+    # filter.addVL("Competitive Bots")
 
     ################################################
     # DONT CHANGE THIS CODE

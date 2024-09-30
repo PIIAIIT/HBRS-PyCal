@@ -2,7 +2,7 @@ import requests
 import os
 import json
 # import datetime
-from src.exportData.createFile import createCalendarFile
+from src.exportData.createFile import createiCalFile
 
 PROJECT_DIR = os.getenv("PROJECT_DIR")
 if PROJECT_DIR is None:
@@ -89,4 +89,4 @@ class WebDataParser:
         # old version
         # creator = Creator(self.currentWorkingDir, "calendar.ical")
         # creator.createFile(self.data)
-        createCalendarFile(self.data)
+        createiCalFile(self.data)

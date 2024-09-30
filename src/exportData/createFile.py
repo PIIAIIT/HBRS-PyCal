@@ -2,14 +2,14 @@ import os
 import datetime as dt
 import uuid
 
-def createCalendarFile(data: list[dict]) -> None:
+def createiCalFile(data: list[dict]) -> None:
     """Writes the ical file
     :param data: The data to write as a list of dictionaries"""
     PROJECT_DIR = os.getenv("PROJECT_DIR") if os.getenv("PROJECT_DIR") is not None else os.getcwd()
-    assert PROJECT_DIR is not None, "PROJECT_DIR is not set" 
     # all conventions are based on the icalendar standard
-    fileName = "stundenplan"
-    fileExt = "ical"
+    assert PROJECT_DIR is not None, "PROJECT_DIR is not set" 
+    fileName = input("Enter the filename: (Standard: Stundenplan)") or "Stundenplan"
+    fileExt = input("Enter the file extension 1: ical, 2: ics (Voreinstellung: 1):") or "ical"
     max = 5
     print(f"(1/{max}) Writing ical file...")
 
@@ -18,9 +18,9 @@ def createCalendarFile(data: list[dict]) -> None:
     print(f"(2/{max}) Creating new file...")
     calenderFilePath = f"/output/{fileName}"
     os.makedirs(PROJECT_DIR + "/output", exist_ok=True)
-    for i in range(1, 100):
+    for i in range(0, 100):
         tempPath = f"/output/{fileName}({i}).{fileExt}" \
-            if i else calenderFilePath
+            if i else calenderFilePath + f".{fileExt}"
         if not os.path.exists(PROJECT_DIR + tempPath):
             calenderFilePath = tempPath
             break

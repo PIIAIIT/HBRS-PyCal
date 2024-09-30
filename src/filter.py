@@ -145,6 +145,10 @@ class CalendarFilter:
             if course not in exclude:
                 newData.append(course)
 
+        if len(newData) == 0:
+            print("No courses found")
+            exit(1)
+
         # write the new data to a cache file
         cache_dir = os.getenv("PROJECT_DIR") if os.getenv("PROJECT_DIR") is None else os.getcwd() + "/cache/"
         assert cache_dir is not None
