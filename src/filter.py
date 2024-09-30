@@ -4,8 +4,7 @@ import os
 from src.option import Option, OptionContains, OptionSemester, OptionVL
 from src.option import OptionLecturer, OptionType, OptionGroup, OptionWeekday
 
-PROJECT_DIR = os.getenv("PROJECT_DIR")
-
+    
 
 class CalendarFilter:
     def __init__(self, cal: Calender) -> None:
@@ -20,36 +19,52 @@ class CalendarFilter:
 
     def addOption(self, option: Option) -> None:
         """Adds an option to the filter"""
-        # TODO: check if the option is valid
-        # - check every Option subtype
-        if not isinstance(option, Option):
-            raise TypeError("The option has to be of type Option")
         if not option.isValid():
             raise ValueError("The option is not valid")
         self.options.append(option)
 
     def addContains(self, filter: str, option: str, contains: bool = True) -> None:
-        """Adds the courses that contains the arg to the filter """
+        """
+        @Args: filter:      str        The contains string  
+        @Args: option:      str        The Option that should be checked  
+        @Args: contains:    bool       If the option should be included or excluded
+        """
         self.addOption(OptionContains(filter, option, contains))
 
     def addSemester(self, semester: str, semesterNumber: int, contains: bool = True) -> None:
-        """Adds the semester to the filter"""
+        """ 
+        @Args: semName:     str        The name of the semester
+        @Args: semester:    int        The number of the semester
+        @Args: contains:    bool       If the option should be included or excluded
+        """
         self.addOption(OptionSemester(semester, semesterNumber, contains))
 
     def addVL(self, titleVL: str, contains: bool = True, group: str = "") -> None:
-        """Adds the VL to the filter"""
-        self.addOption(OptionVL(titleVL, contains))
+        """ 
+        @Args: titleVL:     str       The title of the VL
+        @Args: contains:    bool      If the option should be included or excluded
+        @Args: group:       str       (Optional) The group of the VL: will not include VL only Ü
+        """
+        self.addOption(OptionVL(titleVL, contains, group))
 
     def addLecturer(self, lecturer: str, contains: bool = True) -> None:
-        """Adds the lecturer to the filter"""
+        """
+        @Args: lecturer:    str      The name of the lecturer
+        @Args: contains:    bool     If the option should be included or excluded
+        """
         self.addOption(OptionLecturer(lecturer, contains))
 
     def addType(self, type_: str, contains: bool = True) -> None:
-        """Adds the type to the filter"""
+        """
+        @Args: type_:       str      The type of the course: Vorlesung(V), Übung(Ü), Praktikum(P)
+        @Args: contains:    bool     If the option should be included or excluded
+        """
         self.addOption(OptionType(type_, contains))
 
     def addGroup(self, group: str, contains: bool = True) -> None:
         """Adds the group to the filter"""
+        print("This function is not yet implemented")
+        exit(1)
         self.addOption(OptionGroup(group, contains))
 
     def addWeekday(self, weekday: str, contains: bool = True) -> None:
@@ -73,7 +88,9 @@ class CalendarFilter:
 
     def generateOptionFile(self) -> None:
         """Generates the option file"""
-        with open(PROJECT_DIR + "/cache/semester.json", "w", encoding="utf-8") as f:
+        cache_dir = os.getenv("PROJECT_DIR") if os.getenv("PROJECT_DIR") is None else os.getcwd() + "/cache/"
+        assert cache_dir is not None
+        with open(cache_dir + "semester.json", "w", encoding="utf-8") as f:
             json.dump(self.availableOptions, f, indent=4, ensure_ascii=False)
 
     def __contains(self, dupe: dict, courses: list[dict]) -> bool:
@@ -129,7 +146,8 @@ class CalendarFilter:
                 newData.append(course)
 
         # write the new data to a cache file
-        cache_dir = PROJECT_DIR + "/cache/"
+        cache_dir = os.getenv("PROJECT_DIR") if os.getenv("PROJECT_DIR") is None else os.getcwd() + "/cache/"
+        assert cache_dir is not None
         f = open(cache_dir + "after.json",
                  "w", encoding="utf-8")
         json.dump(newData, f, indent=4, ensure_ascii=False)

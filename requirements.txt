@@ -1,3 +1,2 @@
-python=3.12.5
-# python-tk=8.6
-python-requests=2.32.3
+# tk==8.6
+requests==2.32.3

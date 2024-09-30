@@ -3,9 +3,11 @@
 # config
 export PROJECT_DIR=$(pwd)
 
-# Pfad zur Python-Datei
-PYTHON_FILE="./__main__.py"
+# path to python file and requirements file
+PYTHON_FILE="__main__.py"
+REQUIRED_PKG="requirements.txt"
 
+# Start python file
 if [ -f "$PYTHON_FILE" ]; then
   echo "Starte $PYTHON_FILE..."
   python3 "$PYTHON_FILE"

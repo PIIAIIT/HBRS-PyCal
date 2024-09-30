@@ -5,18 +5,20 @@ import json
 from src.exportData.createFile import createCalendarFile
 
 PROJECT_DIR = os.getenv("PROJECT_DIR")
+if PROJECT_DIR is None:
+    PROJECT_DIR = os.getcwd()
+cache_dir = PROJECT_DIR + "/cache/"
 
 
 class WebDataParser:
     def __init__(self):
         self.URL = "https://eva2.olotl.net/"
-        self.data: list[dict] = None
+        self.data: list[dict] = []
 
         # lastUpdate updates every day
-        pwd = os.getenv("PROJECT_DIR") + "/"
-        os.makedirs(pwd + "cache", exist_ok=True)
-        if os.path.exists(pwd + "cache/lastUpdate.txt"):
-            with open(pwd + "cache/lastUpdate.txt", "r") as f:
+        os.makedirs(cache_dir, exist_ok=True)
+        if os.path.exists(cache_dir + "lastUpdate.txt"):
+            with open(cache_dir + "lastUpdate.txt", "r") as f:
                 self.lastUpdate = f.read()
         else:
             self.lastUpdate = ""
@@ -43,7 +45,7 @@ class WebDataParser:
         try:
             # self.data = json.loads(soup.text)  # pareses the json data
             self.data = response.json()
-            self.writeDataToJSON(PROJECT_DIR)
+            self.writeDataToJSON()
             # self.lastUpdate = str(datetime.date.today())
             print("Data was successfully extracted")
         except json.JSONDecodeError:
@@ -61,8 +63,6 @@ class WebDataParser:
         """
         Sets the data of the parser object
         """
-        if data is None:
-            raise ValueError("Data is None")
         self.data = data
 
     def showData(self) -> None:
@@ -71,15 +71,15 @@ class WebDataParser:
         """
         print(self.data)
 
-    def writeDataToJSON(self, maindir: str) -> None:
+    def writeDataToJSON(self) -> None:
         # file already exists
         # if not os.path.exists(maindir + "/cache/data.json"):
-        f = open(maindir + "/cache/data.json", "w", encoding="utf-8")
+        f = open(cache_dir + "data.json", "w", encoding="utf-8")
         json.dump(self.data, f, ensure_ascii=False, indent=4)
         f.close()
 
-        if not os.path.exists(maindir + "/cache/lastUpdate.txt"):
-            with open(maindir + "/cache/lastUpdate.txt", "w") as f:
+        if not os.path.exists(cache_dir + "lastUpdate.txt"):
+            with open(cache_dir + "lastUpdate.txt", "w") as f:
                 f.write(self.lastUpdate)
 
     def generateCalendarFile(self) -> None:

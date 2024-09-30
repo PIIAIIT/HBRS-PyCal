@@ -1,12 +1,12 @@
 import os
-import datetime
+import datetime as dt
 import uuid
-PROJECT_DIR = os.getenv("PROJECT_DIR")
-
 
 def createCalendarFile(data: list[dict]) -> None:
     """Writes the ical file
     :param data: The data to write as a list of dictionaries"""
+    PROJECT_DIR = os.getenv("PROJECT_DIR") if os.getenv("PROJECT_DIR") is not None else os.getcwd()
+    assert PROJECT_DIR is not None, "PROJECT_DIR is not set" 
     # all conventions are based on the icalendar standard
     fileName = "stundenplan"
     fileExt = "ical"
@@ -38,29 +38,30 @@ def createCalendarFile(data: list[dict]) -> None:
         f.write("X-WR-CALNAME:Stundenplan H-brs\n")
         f.write("X-WR-TIMEZONE:Europe/Berlin\n")
         f.write("X-WR-CALDESC:" +
-                "Diese App referenziert den iCalGenerator von @Hochgesand\\nSeite\n")
+                "Diese App referenziert den iCalGenerator von @Hochgesand\n")
 
         # Events
         for lv in data:
             try:
-                startDate = datetime.strptime(
+                startDate = dt.datetime.strptime(
                     lv["parsedDate"]["start"], "%d.%m.%Y")
-                endDate = datetime.strptime(
+                endDate = dt.datetime.strptime(
                     lv["parsedDate"]["end"], "%d.%m.%Y")
                 weeks = endDate - startDate
-                eventStartTime = datetime(startDate.year, startDate.month, startDate.day,
-                                          int(lv["startTime"].split(":")[0]),
-                                          int(lv["startTime"].split(":")[1]))
-                eventEndTime = datetime(startDate.year, startDate.month, startDate.day,
-                                        int(lv["endTime"].split(":")[0]),
-                                        int(lv["endTime"].split(":")[1]))
+                eventStartTime = dt.datetime(startDate.year, startDate.month, startDate.day,
+                                             int(lv["startTime"].split(":")[0]),
+                                             int(lv["startTime"].split(":")[1]))
+                eventEndTime = dt.datetime(startDate.year, startDate.month, startDate.day,
+                                           int(lv["endTime"].split(":")[0]),
+                                           int(lv["endTime"].split(":")[1]))
                 interval = 1
                 tmp = lv.get("parsedDate", {"info": "KW ()"})
                 info = tmp.get("info", "")
                 if not info.startswith("KW"):
                     interval = 2
 
-            except Exception:
+            except Exception as e:
+                print(e)
                 print(f"Error while parsing: {lv}")
                 continue
 
@@ -71,13 +72,14 @@ def createCalendarFile(data: list[dict]) -> None:
                     eventEndTime.strftime("%Y%m%dT%H%M%S") + "\n")
             f.write(f"RRULE:FREQ=WEEKLY;COUNT={int((weeks.days//7) / interval)};" +
                     f"INTERVAL={interval}" + "\n")
-            f.write(f"DTSTAMP:{datetime.now().strftime('%Y%m%dT%H%M%SZ')}\n")
+            f.write(
+                f"DTSTAMP:{dt.datetime.now().strftime('%Y%m%dT%H%M%SZ')}\n")
             f.write("UID:"+str(uuid.uuid4())+"\n")
-            f.write("CREATED:"+datetime.now().strftime('%Y%m%dT%H%M%SZ')+"\n")
-            f.write("DESCRIPTION:"+lv.get("title") + " in Raum: " +
+            f.write("CREATED:"+dt.datetime.now().strftime('%Y%m%dT%H%M%SZ')+"\n")
+            f.write("DESCRIPTION:" +lv.get("title", "") + " in Raum: " +
                     lv.get("room") + " bei: " + lv.get("lecturer") + "\n")
-            f.write("LOCATION:"+lv.get("room")+"\n")
-            f.write("SUMMARY:"+lv.get("title")+"\n")
+            f.write("LOCATION:"+lv.get("room", "")+"\n")
+            f.write("SUMMARY:"+lv.get("title", "")+"\n")
             f.write("END:VEVENT\n")
         # Events
 

@@ -29,8 +29,8 @@ class OptionContains(Option):
     def __init__(self, name: str, option: str, include: bool) -> None:
         """
         @Args: name:    str        The contains string
-               include: bool       If the option should be included or excluded
                option:  str        The Option that should be checked
+               include: bool       If the option should be included or excluded
         """
         super().__init__(name, include)
         self.option = option
@@ -43,6 +43,11 @@ class OptionContains(Option):
 
 class OptionSemester(Option):
     def __init__(self, semName: str, semester: int, include: bool) -> None:
+        """ 
+        @Args: semName:    str        The name of the semester
+        @Args: semester:   int        The number of the semester
+        @Args: include:    bool       If the option should be included or excluded
+        """
         super().__init__(str.join(" ", [semName, str(semester)]), include)
 
     def checkCourse(self, course: dict[str, str]) -> bool:
@@ -51,15 +56,23 @@ class OptionSemester(Option):
 
 
 class OptionVL(Option):
-    def __init__(self, name: str, include: bool) -> None:
+    def __init__(self, name: str, include: bool, group: str) -> None:
         super().__init__(name, include)
+        if group != "":
+            print("Group assignment doenst work yet!")
+            print("Try without Group assignment")
+            exit(1)
+        self.group = group
 
     def checkCourse(self, course: dict[str, str]) -> bool:
         # print(course["title"], "does not match", self.name, ratio)
         b = difflib.SequenceMatcher(None, course["title"].lower(),
                                     self.optionName.lower()).ratio() \
             >= Option.threshold
-        return b
+        if self.group == "":
+            return b
+        b2 = course["group"] != "" and course["group"] is not None and course["group"] == self.group
+        return b and b2
 
 
 class OptionLecturer(Option):
