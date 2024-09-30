@@ -6,7 +6,7 @@ from src.option import OptionLecturer, OptionType, OptionGroup, OptionWeekday
 
     
 
-class CalendarFilter:
+class CalenderFilter:
     def __init__(self, cal: Calender) -> None:
         self.cal = cal
         if not isinstance(self.cal, Calender):
