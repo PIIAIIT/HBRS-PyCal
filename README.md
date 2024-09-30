@@ -1,32 +1,81 @@
 # HBRS-PyCal
-Willkommen zu einem kleinen Python-Projekt für das Webscraping der Website https://eva2.olotl.net/. Es extrahiert Daten, analysiert sie und erstellt eine iCal-Datei, die in Ihre Kalenderanwendung importiert werden kann. Bitte habt Nachsicht mit dem unprofessionellen Python-Code und dem Design der App. Diese App wurde nur kurzfristig erstellt und eher aus Spaß. 😄
+Das ist ein kleines Python-Projekt, um ein Stundenplan für die Hochschule Bonn-Rhein-Sieg zu generieren.
+Diese Datei kann dann in eine beliebiges Kalender-Programm importiert werden.
 
 # Requirements
-Um dieses Projekt auszuführen, benötigen Sie [Python](https://www.python.org/) und das Python-Modul customtkinter. Hier ist ein Link, wie Sie [customtkinter](https://pypi.org/project/customtkinter/0.3/) installieren können. Weitere offensichtliche Anforderungen finden Sie in der [requirements.txt](./requirements.txt).
-
+Um dieses Projekt auszuführen, benötigen Sie [Python](https://www.python.org/). \
+Außerdem benötigen sie die folgenden Python-Module:
+- requests
+<br><br>
 # How to use
-- Über die Konsole:
-  + Geben Sie `git clone https://github.com/PIIAIIT/HBRS-PyCal.git` in Ihre Konsole ein
-  + Wechseln Sie in das Verzeichnis `cd HBRS-PyCal`
-  + Starten Sie dann die Datei frame.py mit `python frame.py`
-- Download der .zip-Datei
-  + Laden Sie zunächst die Zip-Datei [hier](https://github.com/PIIAIIT/HBRS-PyCal/archive/refs/heads/main.zip) herunter
-  + Entpacken Sie die Zip-Datei in einem beliebigen Verzeichnis
-  + Wechseln Sie in das Verzeichnis
-  + Führen Sie die Python-Datei frame.py aus
-- Nachdem die `frame.py` Datei ausgeführt wurde ist die .ical-Datei in dem selben Verzeichnis wie die python-Dateien als `calendar.ical`.
-
-# How it works
-Die App besteht aus zwei Dateien der `frame.py` und der `app.py`<br>
-Die `app.py` gibt die Grundlage für die App und kann auch ohne GUI ausgeführt werden.<br>
-+ Um mit der app.py eine ical Datei zu generieren muss zuerst eine OptionList Instanzieren werden.
-+ Die OptionList kann mehrere Option Objekte beinhaltet die auch vorher instanziert werden müssen. (Siehe app.py Datei)
-+ Außerdem besteht die Möglichkeit mit der update Funktion die `data.json` Datei erneut zu generieren
-+ Schließlich kann mit der ical Funktion die .ical Datei in den aktuellen Verzeichnis geschrieben werden und das war's!<br>
+- Geben Sie folgenden command in die Konsole ein:
+    ```python
+    git clone https://github.com/PIIAIIT/HBRS-PyCal.git
+    cd HBRS-PyCal
+    ```
 <br>
 
-Die `frame.py` ergibt die Grafische Oberfläche und macht sie zu einer vollständigen Anwendung.<br>
-* Die `frame.py` Datei bietet weniger Flexibilität. Am Besten wird diese Datei einfach nur ausgeführt.
+# How it works
++   ## Dein eigenen Stundenplan erstellen
+    - Im dem Ordner finden Sie verschiedene Dateien unteranderem die `PyCal.py` Datei. 
+      Öffnen Sie die Datei mit einer von Ihnen beliebigen IDE.
+    - Zeile 29 erstellt den CalenderFilter.
+    ```python
+        # Create a Chooser object and adds options to it
+    filter = CalenderFilter(cal) # DONT CHANGE THIS
+    ```
+    - Ab der Zeile 32 können Sie Ihren Fachbereich und Semester eingeben.
+    ```python
+        # USE addSemester to add a Semester that you want to include in your ical file
+        # you can add a boolean value at the end of the function to decide if the semester should be included or not
+        # addSemester(<SemsterName>, <SemesterNr>, <IncludeSemester>)
+        filter.addSemester("BI", 3)
+        # or
+        filter.addSemester("BWI", 3, False) # So you dont want BWI 3 in your calender file
+    ```
+    - Ab der Zeile 41 können Sie einzelne Vorlesungen hinzufügen: <br>
+     Es ist zu beachten, dass die addVL Funktion nicht den String auf Gleichheit überprüft sondern nur auf Ähnlichkeit. Wenn eine VL nicht hinzugefügt wird schauen Sie bitte in der `cache/semester.json` Datei für alle VL's und SemesterNamen. \
+    !! Die `semester.json` Datei wird erst beim ersten mal Ausführen generiert. !!
+    ```python
+        # addVL(<VLName>, <IncludeVL>)
+        # For <VLName> you can look at the "cache/semester.json" file
+        filter.addVL("Diskrete Mathematik und Lineare Algebra")
+    ```
+     oder dafür sorgen dass eine Vorlesung nicht hinzugefügt werden soll:
+    ```python
+        filter.addVL("Competitive Bots", False)
+    ```
+    
+    
+    - Auf der Zeile 52 kann man nach einem \<String> suchen in einer speziellen Course \<Key>
+    die \<Key> Argumente finden Sie in der `cache/data.json` Datei. \
+    !! Die `data.json` Datei wird erst beim ersten mal Ausführen generiert. !!
+    ```python
+        # addContains(<String>, <Key>, <IncludeString>)
+        # <String> is the string that should be contained
+        # <Key> is the key of the dictionary of the course data
+    
+        filter.addContains("Projekt-Seminar", "title", False)
+    ```
++ ## Ausführen der PyCal.py Datei
+    - Nach der Bearbeitung der Optionen kannst du die `PyCal.py` einfach ausführen. \
+    Windows:
+    ```python
+        python3 PyCal.py
+    ```
+    MacOS/Linux:
+    ```python
+        python PyCal.py
+    ```
+    
+    - Eine Andere Möglichkeit wäre:
+    ```sh
+        ./start.sh
+    ```
+
++ ## Output
+    - Deine ```<name>.ical``` liegt nun im ```ouput/``` Ordner bereit.
+
 
 # Problems
 Bei Problemen gerne ein Issue erstellen.
