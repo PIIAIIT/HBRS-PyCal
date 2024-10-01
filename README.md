@@ -84,6 +84,8 @@ Außerdem benötigen sie die folgenden Python-Module:
 + ## Output
     - Deine ```<name>.ical``` liegt nun im ```ouput/``` Ordner bereit.
 
+    - Diese Datei kann in ein beliebiges Kalender-Programm importiert werden. [Hier](./src/docs/IMPORT.md) ist ein Beispiel für den Google Kalender:
+
 
 # Problems
 Bei Problemen gerne ein Issue erstellen.
