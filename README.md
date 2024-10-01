@@ -2,6 +2,11 @@
 Das ist ein kleines Python-Projekt, um ein Stundenplan für die Hochschule Bonn-Rhein-Sieg zu generieren.
 Diese Datei kann dann in eine beliebiges Kalender-Programm importiert werden.
 
+# IN DEVELEOPMENT 
+Das ist zur Zeit nur ein Prototyp und wird noch weiter entwickelt. \
+Es kann sein, dass es noch einige Bugs gibt. \
+
+
 # Requirements
 Um dieses Projekt auszuführen, benötigen Sie [Python](https://www.python.org/). \
 Außerdem benötigen sie die folgenden Python-Module:
@@ -59,16 +64,6 @@ Außerdem benötigen sie die folgenden Python-Module:
     ```
 + ## Ausführen der PyCal.py Datei
     - Nach der Bearbeitung der Optionen kannst du die `PyCal.py` einfach ausführen. \
-    Windows:
-    ```python
-        python3 PyCal.py
-    ```
-    MacOS/Linux:
-    ```python
-        python PyCal.py
-    ```
-    
-    - Eine Andere Möglichkeit wäre:
     ```sh
         ./start.sh
     ```
