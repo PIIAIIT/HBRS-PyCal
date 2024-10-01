@@ -1,4 +1,4 @@
-./output/*
-./cache/*
-*__pycach__/*
+cache/*
+output/*
+*__pycache__*
 .env
