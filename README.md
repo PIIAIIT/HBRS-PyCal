@@ -2,10 +2,9 @@
 Das ist ein kleines Python-Projekt, um ein Stundenplan für die Hochschule Bonn-Rhein-Sieg zu generieren.
 Diese Datei kann dann in eine beliebiges Kalender-Programm importiert werden.
 
-# IN DEVELEOPMENT 
+# !!! IN DEVELEOPMENT !!! 
 Das ist zur Zeit nur ein Prototyp und wird noch weiter entwickelt. \
-Es kann sein, dass es noch einige Bugs gibt. \
-
+Es kann sein, dass es noch einige Bugs gibt.
 
 # Requirements
 Um dieses Projekt auszuführen, benötigen Sie [Python](https://www.python.org/). \
@@ -13,14 +12,17 @@ Außerdem benötigen sie die folgenden Python-Module:
 - requests
 <br><br>
 # How to use
-- Geben Sie folgenden command in die Konsole ein:
+
++   ## Github repository klonen
+    - Per Konsole:
     ```python
     git clone https://github.com/PIIAIIT/HBRS-PyCal.git
     cd HBRS-PyCal
     ```
-<br>
+    - Als `.zip` Datei herunterladen
+        + Oben auf `<> Code` drücken und auf `Download zip` drücken
+        + Die Dateien in ein beliebigen Ordner entpacken.
 
-# How it works
 +   ## Dein eigenen Stundenplan erstellen
     - Im dem Ordner finden Sie verschiedene Dateien unteranderem die `PyCal.py` Datei. 
       Öffnen Sie die Datei mit einer von Ihnen beliebigen IDE.
@@ -63,10 +65,21 @@ Außerdem benötigen sie die folgenden Python-Module:
         filter.addContains("Projekt-Seminar", "title", False)
     ```
 + ## Ausführen der PyCal.py Datei
-    - Nach der Bearbeitung der Optionen kannst du die `PyCal.py` einfach ausführen. \
-    ```sh
-        ./start.sh
-    ```
+    - Nach der Bearbeitung der Optionen kannst du das Start-Script `start.*` einfach ausführen. \
+      + Windows:
+      ```sh
+          ./start.bat
+      ```
+      oder für Powershell:
+      ```sh
+          ./start.ps1
+      ```
+
+      + Linux/MacOS:
+        ```sh
+          ./start.sh
+        ```
+
 
 + ## Output
     - Deine ```<name>.ical``` liegt nun im ```ouput/``` Ordner bereit.
