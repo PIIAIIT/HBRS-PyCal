@@ -29,7 +29,7 @@ Außerdem benötigen sie die folgenden Python-Module:
     - Zeile 29 erstellt den CalenderFilter.
     ```python
         # Create a Chooser object and adds options to it
-    filter = CalenderFilter(cal) # DONT CHANGE THIS
+        filter = CalenderFilter(cal) # DONT CHANGE THIS
     ```
     - Ab der Zeile 32 können Sie Ihren Fachbereich und Semester eingeben.
     ```python
@@ -76,9 +76,9 @@ Außerdem benötigen sie die folgenden Python-Module:
       ```
 
       + Linux/MacOS:
-        ```sh
+      ```sh
           ./start.sh
-        ```
+      ```
 
 
 + ## Output
