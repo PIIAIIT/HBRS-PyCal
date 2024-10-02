@@ -6,27 +6,34 @@ Diese Datei kann dann in eine beliebiges Kalender-Programm importiert werden.
 Das ist zur Zeit nur ein Prototyp und wird noch weiter entwickelt. \
 Es kann sein, dass es noch einige Bugs gibt.
 
-# Requirements
-Um dieses Projekt auszuführen, benötigen Sie [Python](https://www.python.org/). \
-Außerdem benötigen sie die folgenden Python-Module:
-- requests
-<br><br>
-# How to use
+# Voraussetzungen
+Für die Ausführung dieses Projekts benötigen Sie [Python](https://www.python.org/).__
+Zusätzlich werden folgende Python-Module benötigt:
 
-+   ## Github repository klonen
-    - Per Konsole:
+- [requests](https://pypi.org/project/requests/)
+
+Die Installation der Module erfolgt ganz einfach über [pip](https://pip.pypa.io/en/stable/installation/). Führen Sie dazu folgenden Befehl in Ihrer Konsole aus:
+```
+  python -m pip install requests
+```
+
+<br><br>
+# Anleitung zur Verwendung
+
+*   ## Github repository klonen
+    - Über die Konsole:
     ```python
     git clone https://github.com/PIIAIIT/HBRS-PyCal.git
     cd HBRS-PyCal
     ```
-    - Als `.zip` Datei herunterladen
-        + Oben auf `<> Code` drücken und auf `Download zip` drücken
-        + Die Dateien in ein beliebigen Ordner entpacken.
+    - Alternativ als `.zip` Datei herunterladen
+        + Klicken Sie oben auf `<> Code` und wählen Sie `Download ZIP`.
+        + Entpacken Sie die Dateien in einem Ordner Ihrer Wahl.
 
-+   ## Dein eigenen Stundenplan erstellen
-    - Im dem Ordner finden Sie verschiedene Dateien unteranderem die `PyCal.py` Datei. 
-      Öffnen Sie die Datei mit einer von Ihnen beliebigen IDE.
-    - Zeile 29 erstellt den CalenderFilter.
+*   ## Dein eigenen Stundenplan erstellen
+    - Im dem Ordner finden Sie verschiedene Dateien darunter die `PyCal.py` Datei. 
+      Öffnen Sie diese mit einer beliebigen IDE.
+    - Zeile 29 erstellt den `CalenderFilter`.
     ```python
         # Create a Chooser object and adds options to it
         filter = CalenderFilter(cal) # DONT CHANGE THIS
@@ -40,23 +47,21 @@ Außerdem benötigen sie die folgenden Python-Module:
         # or
         filter.addSemester("BWI", 3, False) # So you dont want BWI 3 in your calender file
     ```
-    - Ab der Zeile 41 können Sie einzelne Vorlesungen hinzufügen: <br>
-     Es ist zu beachten, dass die addVL Funktion nicht den String auf Gleichheit überprüft sondern nur auf Ähnlichkeit. Wenn eine VL nicht hinzugefügt wird schauen Sie bitte in der `cache/semester.json` Datei für alle VL's und SemesterNamen. \
-    !! Die `semester.json` Datei wird erst beim ersten mal Ausführen generiert. !!
+    - Ab der Zeile 42 können Sie einzelne Vorlesungen hinzufügen:
+      + Beachten Sie, dass die Funktion `addVL` nur auf Ähnlichkeit prüft. Falls eine Vorlesung nicht hinzugefügt wird, sehen Sie in der `cache/semester.json` Datei nach allen VL-Namen. \
+    **Hinweis:** Die `semester.json` Datei wird erst beim ersten mal Ausführen generiert.
     ```python
         # addVL(<VLName>, <IncludeVL>)
         # For <VLName> you can look at the "cache/semester.json" file
         filter.addVL("Diskrete Mathematik und Lineare Algebra")
     ```
-     oder dafür sorgen dass eine Vorlesung nicht hinzugefügt werden soll:
+      + Um sicherzustellen, dass eine Vorlesung **nicht** hinzugefügt wird:
     ```python
         filter.addVL("Competitive Bots", False)
     ```
-    
-    
-    - Auf der Zeile 52 kann man nach einem \<String> suchen in einer speziellen Course \<Key>
-    die \<Key> Argumente finden Sie in der `cache/data.json` Datei. \
-    !! Die `data.json` Datei wird erst beim ersten mal Ausführen generiert. !!
+    - Auf der Zeile 52 können Sie nach einem \<String> in einem bestimmten Kurs\<Key> suchen.
+    Die \<Key>-Argumente finden Sie in der `cache/data.json` Datei. \
+    **Hinweis:** Die `data.json` Datei wird ebenfalls erst beim ersten Ausführen generiert.
     ```python
         # addContains(<String>, <Key>, <IncludeString>)
         # <String> is the string that should be contained
@@ -64,15 +69,15 @@ Außerdem benötigen sie die folgenden Python-Module:
     
         filter.addContains("Projekt-Seminar", "title", False)
     ```
-+ ## Ausführen der PyCal.py Datei
-    - Nach der Bearbeitung der Optionen kannst du das Start-Script `start.*` einfach ausführen. \
+*   ## Ausführen der `PyCal.py` Datei
+    - Nachdem Sie die gewünschten Optionen bearbeitet haben, können Sie das Start-Script ausführen:
       + Windows:
       ```sh
-          ./start.bat
+          start.bat
       ```
       oder für Powershell:
       ```sh
-          ./start.ps1
+          start.ps1
       ```
 
       + Linux/MacOS:
@@ -81,11 +86,11 @@ Außerdem benötigen sie die folgenden Python-Module:
       ```
 
 
-+ ## Output
-    - Deine ```<name>.ical``` liegt nun im ```ouput/``` Ordner bereit.
+*   ## Output
+    - Die Datei ```<name>.ical``` wird im Ordner ```ouput/``` abgelegt.
 
-    - Diese Datei kann in ein beliebiges Kalender-Programm importiert werden. [Hier](./src/docs/IMPORT.md) ist ein Beispiel für den Google Kalender:
+    - Diese Datei kann in ein beliebiges Kalenderprogramm importiert werden. Eine Anleitung für den Google Kalender finden Sie [hier](./src/docs/IMPORT.md).
 
 
 # Problems
-Bei Problemen gerne ein Issue erstellen.
+Bei Problemen mit dem Script erstellen Sie bitte ein [Issue](https://github.com/PIIAIIT/HBRS-PyCal/issues), um Unterstützung zu erhalten.

@@ -11,7 +11,7 @@ if exist "%PYTHON_FILE%" (
   echo Starte %PYTHON_FILE%...
 
   REM Run Python File
-  python %PYTHON_FILE%
+  py %PYTHON_FILE%
 
 ) else (
   echo "Python is not installed"
