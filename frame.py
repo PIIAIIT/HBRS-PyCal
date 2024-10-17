@@ -1,10 +1,9 @@
 # from tkinter import *
 # from tkinter import ctk
+from tkinter.filedialog import asksaveasfile, asksaveasfilename
 from customtkinter import *
-from src.calendar import Calender
-from src.filter import CalenderFilter
-import os
 from src.importData.parser import WebDataParser
+from src.exportData.createFile import icalFormat
 
 def run():
     """Initializes the AppFrame object.
@@ -100,8 +99,12 @@ def run():
 
     # update Data
     def create():
+        files = [('All Files', '*.*'), 
+                 ('iCal Files', '*.ics')]
         parser.updateData([d for checkbox, d in allCheckboxes if checkbox.get() == 1])
-        parser.generateCalendarFile(False)
+        f = asksaveasfile(filetypes=files, defaultextension=files[1][1], initialfile="stundenplan.ics")
+        assert f is not None, "No file was selected"
+        f.write(icalFormat(parser.getParsedData()))
 
     createButton = CTkButton(root, text="Erstelle Ical", command=create)
     createButton.pack(pady=15/2, side="bottom", anchor="center")
