@@ -4,7 +4,7 @@
 export PROJECT_DIR=$(pwd)
 
 # path to python file and requirements file
-PYTHON_FILE="PyCal.py"
+PYTHON_FILE="frame.py"
 
 # Create a virtual environment
 if [ ! -d 'venv' ]; then
