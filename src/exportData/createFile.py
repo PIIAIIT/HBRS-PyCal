@@ -2,15 +2,20 @@ import os
 import datetime as dt
 import uuid
 
-def createiCalFile(data: list[dict]) -> None:
+def createiCalFile(data: list[dict], abfrage=True) -> None:
     """Writes the ical file
     :param data: The data to write as a list of dictionaries"""
     PROJECT_DIR = os.getenv("PROJECT_DIR") if os.getenv("PROJECT_DIR") is not None else os.getcwd()
     # all conventions are based on the icalendar standard
     assert PROJECT_DIR is not None, "PROJECT_DIR is not set" 
-    fileName = input("Enter the filename: (Standard: Stundenplan)") or "Stundenplan"
+
     ext = {1: "ics", 2: "ical", 3: "ifb", 4:"icalendar"}
-    inp = input("Enter the file extension 1: ics, 2: ical, 3: ifb, 4: icalendar (Voreinstellung: 1):")
+    if abfrage:
+        fileName = input("Enter the filename: (Standard: Stundenplan)") or "Stundenplan"
+        inp = input("Enter the file extension 1: ics, 2: ical, 3: ifb, 4: icalendar (Voreinstellung: 1):")
+    else:
+        fileName = "Stundenplan"
+        inp = 1 # "ics"
     fileExt = ext.get(int(inp) if inp in ext.keys() else 1)
     max = 5
     print(f"(1/{max}) Writing ical file...")

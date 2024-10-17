@@ -43,6 +43,7 @@ def run():
 
     # Create new checkbuttons
     def showLVs(*args):
+        parser.updateData(data)
         # Clear previous alle checkbutton
         alleBox.configure(variable=IntVar())
         # Clear previous checkbuttons
@@ -100,7 +101,7 @@ def run():
     # update Data
     def create():
         parser.updateData([d for checkbox, d in allCheckboxes if checkbox.get() == 1])
-        parser.generateCalendarFile()
+        parser.generateCalendarFile(False)
 
     createButton = CTkButton(root, text="Erstelle Ical", command=create)
     createButton.pack(pady=15/2, side="bottom", anchor="center")

@@ -14,6 +14,7 @@ class WebDataParser:
     def __init__(self):
         self.URL = "https://eva2.olotl.net/"
         self.data: list[dict] = []
+        self.stud: list[str] = []
 
         # lastUpdate updates every day
         os.makedirs(cache_dir, exist_ok=True)
@@ -45,7 +46,10 @@ class WebDataParser:
         try:
             # self.data = json.loads(soup.text)  # pareses the json data
             self.data = response.json()
-            self.writeDataToJSON()
+            for d in self.data:
+                if d["semesterName"] not in self.stud:
+                    self.stud.append(d["semesterName"])
+            # self.writeDataToJSON()
             # self.lastUpdate = str(datetime.date.today())
             print("Data was successfully extracted")
         except json.JSONDecodeError:
@@ -58,6 +62,12 @@ class WebDataParser:
         if self.data is None:
             raise ValueError("No data was extracted yet")
         return self.data
+
+    def getStudiengaenge(self) -> list[str]:
+        return self.stud
+
+    def getLehrveranstaltungVonSemester(self, semesterName:str) -> list[dict]:
+        return sorted([d for d in self.data if d["semesterName"] == semesterName], key=lambda x: x["title"])
 
     def updateData(self, data: list[dict]) -> None:
         """
@@ -82,11 +92,11 @@ class WebDataParser:
             with open(cache_dir + "lastUpdate.txt", "w") as f:
                 f.write(self.lastUpdate)
 
-    def generateCalendarFile(self) -> None:
+    def generateCalendarFile(self, abfrage=True) -> None:
         """
         Writes the data from the website to a json file
         """
         # old version
         # creator = Creator(self.currentWorkingDir, "calendar.ical")
         # creator.createFile(self.data)
-        createiCalFile(self.data)
+        createiCalFile(self.data, abfrage)
