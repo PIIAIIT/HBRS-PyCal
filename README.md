@@ -16,10 +16,10 @@ Für die Ausführung dieses Projekts benötigen Sie [Python](https://www.python.
 
 ## Github repository klonen
 - Über die Konsole:
-    >```python
+    ```python
     git clone https://github.com/PIIAIIT/HBRS-PyCal.git
     cd HBRS-PyCal
-    >```
+    ```
 - Alternativ als `.zip` Datei herunterladen
     + Klicken Sie oben auf [`<> Code`](https://github.com/PIIAIIT/HBRS-PyCal/archive/refs/heads/dev.zip) und wählen Sie `Download ZIP`.
     + Entpacken Sie die Dateien in einem Ordner Ihrer Wahl.
