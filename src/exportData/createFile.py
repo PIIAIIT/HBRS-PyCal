@@ -10,7 +10,8 @@ def createiCalFile(data: list[dict]) -> None:
     assert PROJECT_DIR is not None, "PROJECT_DIR is not set" 
     fileName = input("Enter the filename: (Standard: Stundenplan)") or "Stundenplan"
     ext = {1: "ics", 2: "ical", 3: "ifb", 4:"icalendar"}
-    fileExt = ext.get(int(input("Enter the file extension 1: ics, 2: ical, 3: ifb, 4: icalendar (Voreinstellung: 1):")), "ics")
+    inp = input("Enter the file extension 1: ics, 2: ical, 3: ifb, 4: icalendar (Voreinstellung: 1):")
+    fileExt = ext.get(int(inp) if inp in ext.keys() else 1)
     max = 5
     print(f"(1/{max}) Writing ical file...")
 
