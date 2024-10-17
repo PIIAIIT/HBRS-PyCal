@@ -4,7 +4,7 @@
 set PROJECT_DIR=%cd%
 
 :: Path to the Python File
-set PYTHON_FILE=PyCal.py
+set PYTHON_FILE=frame.py
 
 if not exist "venv" (
   echo "Creating Virtual Environment..."
