@@ -7,15 +7,7 @@ Das ist zur Zeit nur ein Prototyp und wird noch weiter entwickelt. \
 Es kann sein, dass es noch einige Bugs gibt.
 
 # Voraussetzungen
-Für die Ausführung dieses Projekts benötigen Sie [Python](https://www.python.org/).__
-Zusätzlich werden folgende Python-Module benötigt:
-
-- [requests](https://pypi.org/project/requests/)
-
-Die Installation der Module erfolgt ganz einfach über [pip](https://pip.pypa.io/en/stable/installation/). Führen Sie dazu folgenden Befehl in Ihrer Konsole aus:
-```
-  python -m pip install requests
-```
+Für die Ausführung dieses Projekts benötigen Sie [Python](https://www.python.org/).
 
 <br><br>
 # Anleitung zur Verwendung
@@ -75,19 +67,14 @@ Die Installation der Module erfolgt ganz einfach über [pip](https://pip.pypa.io
       ```sh
           start.bat
       ```
-      oder für Powershell:
-      ```sh
-          start.ps1
-      ```
-
       + Linux/MacOS:
       ```sh
           ./start.sh
       ```
 
 
-*   ## Output
-    - Die Datei ```<name>.ical``` wird im Ordner ```ouput/``` abgelegt.
+*   ## Output 
+    - Die Datei ```<name>.ics``` wird im Ordner ```ouput/``` abgelegt.
 
     - Diese Datei kann in ein beliebiges Kalenderprogramm importiert werden. Eine Anleitung für den Google Kalender finden Sie [hier](./src/docs/IMPORT.md).
 
