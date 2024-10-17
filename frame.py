@@ -5,6 +5,8 @@ from customtkinter import *
 from src.importData.parser import WebDataParser
 from src.exportData.createFile import icalFormat
 
+PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 def run():
     """Initializes the AppFrame object.
     :param _app: The App object to use"""
@@ -102,9 +104,10 @@ def run():
         files = [('All Files', '*.*'), 
                  ('iCal Files', '*.ics')]
         parser.updateData([d for checkbox, d in allCheckboxes if checkbox.get() == 1])
+        os.makedirs(PROJECT_DIR + "/output", exist_ok=True)
         f = asksaveasfile(filetypes=files, defaultextension=files[1][1], initialfile="stundenplan.ics")
-        assert f is not None, "No file was selected"
-        f.write(icalFormat(parser.getParsedData()))
+        if f is not None:
+            f.write(icalFormat(parser.getParsedData()))
 
     createButton = CTkButton(root, text="Erstelle Ical", command=create)
     createButton.pack(pady=15/2, side="bottom", anchor="center")
