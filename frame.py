@@ -1,7 +1,6 @@
-# from tkinter import *
-# from tkinter import ctk
-from tkinter.filedialog import asksaveasfile, asksaveasfilename
-from customtkinter import *
+from tkinter.filedialog import asksaveasfile
+from customtkinter import CTk, CTkFrame, CTkLabel, CTkButton, CTkCheckBox, CTkOptionMenu, CTkCanvas, CTkScrollbar, set_appearance_mode, IntVar, StringVar
+import os
 from src.importData.parser import WebDataParser
 from src.exportData.createFile import icalFormat
 
