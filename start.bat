@@ -13,7 +13,7 @@ if not exist "venv" (
 
 :: Activate the Virtual Environment
 echo "Activating Virtual Environment..."
-call venv\Scripts\activate
+call venv\Scripts\activate.bat
 
 :: Install the required packages
 if exist "requirements.txt" (
