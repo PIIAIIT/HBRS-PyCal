@@ -6,6 +6,7 @@ Diese Datei kann dann in eine beliebiges Kalender-Programm importiert werden.
 
 Das ist zur Zeit nur ein Prototyp und wird noch weiter entwickelt. \
 Es kann sein, dass es noch einige Bugs gibt.
+# !!! Programm funktioniert momentan nicht auf Windows !!!
 
 # Voraussetzungen
 Für die Ausführung dieses Projekts benötigen Sie [Python](https://www.python.org/).
